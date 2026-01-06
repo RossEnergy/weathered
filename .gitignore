@@ -2,3 +2,4 @@ node_modules
 src/go.ts
 dist/go.js
 dist/go.d.ts
+/dist/

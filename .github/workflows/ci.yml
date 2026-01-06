@@ -1,4 +1,4 @@
-name: Test
+name: CI/CD
 
 on:
   pull_request:
@@ -8,20 +8,46 @@ on:
     branches:
       - master
 
+
 jobs:
-  test:
+  build-test-release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      packages: write
+      id-token: write
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Node it
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
+          node-version: '20'
           cache: 'npm'
-          ref: ${{ github.head_ref }}
-      - name: Install it
-        run: npm install
-      - name: Build it
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build
         run: npm run build
-      - name: Test it
-        run: npm run test
+      
+      - name: Test
+        run: npm test
+      
+      - name: Release
+        if: github.event_name == 'push'
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI_NPM_CUSTOM_NAME: ${{ vars.CI_NPM_CUSTOM_NAME }}
+          CI_NPM_CUSTOM_REGISTRY: ${{ vars.CI_NPM_CUSTOM_REGISTRY }}
+          CI_NPM_ACCESS: ${{ vars.CI_NPM_ACCESS }}
+          REPOSITORY_URL: https://github.com/${{ github.repository }}.git
+        run: npx semantic-release
