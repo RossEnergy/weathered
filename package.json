@@ -38,6 +38,7 @@
     "babel-jest": "^27.0.2",
     "eslint": "^7.27.0",
     "jest": "^27.0.1",
+    "jest-date": "^1.1.6",
     "semantic-release": "^23.0.0",
     "typedoc": "^0.22.13",
     "typescript": "^4.2.3"

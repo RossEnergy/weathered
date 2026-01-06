@@ -144,6 +144,13 @@ type Measure = {
   unitCode: string;
 };
 
+type PaginatedResponse = {
+  // pagination is not set if there are no results, otherwise it is always set on paginated responses.
+  pagination?: {
+    next: string;
+  };
+};
+
 type ObservationResponse = {
   properties: {
     presentWeather: PresentWeather[];
@@ -157,10 +164,11 @@ type ObservationResponse = {
     visibility: Measure;
     relativeHumidity: Measure;
     heatIndex: Measure;
+    timestamp: string;
   };
 };
 
-type ObservationsResponse = {
+type ObservationsResponse = PaginatedResponse & {
   features: ObservationResponse[];
 };
 
@@ -245,6 +253,17 @@ type AlertsResponse = {
   features: AlertsFeature[];
 };
 
+type StationObservationsOptions = {
+  // ISO 8601 datetime string
+  start?: string;
+  // ISO 8601 datetime string
+  end?: string;
+  // cursor for pagination
+  cursor?: string;
+  // limit number of results returned
+  limit?: number;
+};
+
 export {
   ForecastType,
   Area,
@@ -264,4 +283,5 @@ export {
   ObservationResponse,
   Measure,
   ForecastPeriod,
+  StationObservationsOptions
 };

@@ -1,7 +1,19 @@
 import fetch from 'cross-fetch';
 
 import Cache from './cache';
-import { ClientOptions, PointResponse, ForecastResponse, AlertsResponse, ForecastType, StationsResponse, Station, ObservationResponse, ObservationsResponse, AlertOptions } from './types';
+import {
+  ClientOptions,
+  PointResponse,
+  ForecastResponse,
+  AlertsResponse,
+  ForecastType,
+  StationsResponse,
+  Station,
+  ObservationResponse,
+  ObservationsResponse,
+  AlertOptions,
+  StationObservationsOptions,
+} from "./types";
 
 const defaultOptions: ClientOptions = {
   userAgent: 'weathered package'
@@ -161,10 +173,33 @@ class Client {
    * 
    * ```typescript
    * const observations = await client.getStationObservations('KSFO');
+   * const observationsWithDateRange = await client.getStationObservations('KSFO', { 
+   *    start: '2023-01-01T00:00:00Z', 
+   *    end: '2023-01-02T23:59:59Z' 
+   * });
    * ```
    */
-  getStationObservations(stationId: string): Promise<ObservationsResponse> {
-    return this.getPath(`stations/${stationId}/observations`);
+  getStationObservations(stationId: string, options?: StationObservationsOptions): Promise<ObservationsResponse> {
+    const params = new URLSearchParams();
+
+    if (options?.start) {
+      params.set("start", options.start);
+    }
+
+    if (options?.end) {
+      params.set("end", options.end);
+    }
+
+    if (options?.cursor) {
+      params.set("cursor", options.cursor);
+    }
+
+    if (options?.limit) {
+      params.set("limit", options.limit.toString());
+    }
+
+    const path = `stations/${stationId}/observations?${params.toString()}`;
+    return this.getPath(path);
   }
 
   /**
