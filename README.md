@@ -2,8 +2,6 @@
 
 A JavaScript wrapper for the [National Weather Service API](https://www.weather.gov/documentation/services-web-api) - built with TypeScript.
 
-![Status](https://github.com/JasonSanford/weathered/actions/workflows/ci.yml/badge.svg)
-
 [Source code](https://github.com/JasonSanford/weathered)
 
 ## Documentation
