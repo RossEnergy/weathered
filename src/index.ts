@@ -19,4 +19,5 @@ export {
   ObservationsResponse,
   Measure,
   ForecastPeriod,
+  StationObservationsOptions
 } from "./types";
