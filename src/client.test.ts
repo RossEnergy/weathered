@@ -1,5 +1,5 @@
 import { Client } from './';
-import 'jest-date';
+import { describe, it, expect } from 'vitest';
 
 describe('Client', () => {
   it('uses the default userAgent', () => {
