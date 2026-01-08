@@ -123,6 +123,12 @@ class Client {
     return this.getUrl(url);
   }
 
+
+  async getStationByStationId(stationId: string): Promise<StationsResponse> {
+    const path = `stations/${stationId}`;
+    return this.getPath(path);
+  }
+
   /**
    * Get the closest weather stations for a given latitude and longitude.
    *
