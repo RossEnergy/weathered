@@ -64,3 +64,30 @@ describe('Client.getStationObservations', () => {
     expect(nextResponse.features.length).toBe(5);
   });
 });
+
+describe("Client.getStationByStationId", () => {
+  it('fetches station details by stationId', async () => {
+    const client = new Client();
+
+    const response = await client.getStationByStationId('KSEA');
+
+    expect(response).toBeDefined();
+
+    expect(response).toHaveProperty('id');
+    expect(response.properties).toHaveProperty('stationIdentifier', 'KSEA');
+    expect(response.properties).toHaveProperty('name');
+    expect(response.properties).toHaveProperty('timeZone');
+    expect(response.properties).toHaveProperty('elevation');
+  });
+
+  it("returns a 404 error object for an invalid stationId", async () => {
+    const client = new Client();
+
+    const response = await client.getStationByStationId("INVALID_STATION");
+
+    expect(response).toHaveProperty('status', 404);
+    expect(response).toHaveProperty('title', 'Not Found');
+    expect(response).toHaveProperty('detail');
+  });
+
+});

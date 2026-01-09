@@ -13,6 +13,7 @@ import {
   ObservationsResponse,
   AlertOptions,
   StationObservationsOptions,
+  WeatherStationResponse
 } from "./types";
 
 const defaultOptions: ClientOptions = {
@@ -124,7 +125,7 @@ class Client {
   }
 
 
-  async getStationByStationId(stationId: string): Promise<StationsResponse> {
+  async getStationByStationId(stationId: string): Promise<WeatherStationResponse> {
     const path = `stations/${stationId}`;
     return this.getPath(path);
   }

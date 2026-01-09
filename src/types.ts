@@ -131,6 +131,20 @@ type Station = {
   };
 };
 
+type WeatherStationResponse = {
+  id: string;
+  properties: {
+    stationIdentifier: string;
+    name: string;
+    timeZone: string;
+    elevation: {
+      value: number;
+      unitCode: string;
+    };
+  };
+};
+
+
 type StationsResponse = {
   features: Station[];
 };
@@ -283,5 +297,6 @@ export {
   ObservationResponse,
   Measure,
   ForecastPeriod,
-  StationObservationsOptions
+  StationObservationsOptions,
+  WeatherStationResponse
 };
