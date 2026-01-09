@@ -1,4 +1,5 @@
 import Cache from './cache';
+import { describe, it, expect } from 'vitest';
 
 describe('Cache', () => {
   it('returns undefined for missing keys', () => {

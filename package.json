@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "test": "jest",
+    "test": "vitest run",
     "docs": "typedoc --out docs --theme default --excludePrivate src/index.ts"
   },
   "keywords": [
@@ -23,34 +23,23 @@
   "author": "Jason Sanford",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "@babel/core": "^7.14.5",
-    "@babel/preset-env": "^7.14.5",
-    "@babel/preset-typescript": "^7.14.5",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^11.1.0",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/github": "^9.2.6",
     "@semantic-release/npm": "^11.0.2",
     "@semantic-release/release-notes-generator": "^12.1.0",
-    "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
-    "babel-jest": "^27.0.2",
     "eslint": "^7.27.0",
-    "jest": "^27.0.1",
     "jest-date": "^1.1.6",
     "semantic-release": "^23.0.0",
-    "typedoc": "^0.22.13",
-    "typescript": "^4.2.3"
+    "typedoc": "^0.28.15",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.16"
   },
   "dependencies": {
     "cross-fetch": "^3.1.4"
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "<rootDir>/dist/",
-      "<rootDir>/node_modules/"
-    ]
   },
   "repository": "JasonSanford/weathered"
 }
