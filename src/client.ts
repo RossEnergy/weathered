@@ -13,6 +13,7 @@ import {
   ObservationsResponse,
   AlertOptions,
   StationObservationsOptions,
+  WeatherStationResponse
 } from "./types";
 
 const defaultOptions: ClientOptions = {
@@ -121,6 +122,12 @@ class Client {
     const forecastKey = forecastType === 'hourly' ? 'forecastHourly' : 'forecast';
     const url = pointResponse.properties[forecastKey];
     return this.getUrl(url);
+  }
+
+
+  async getStationByStationId(stationId: string): Promise<WeatherStationResponse> {
+    const path = `stations/${stationId}`;
+    return this.getPath(path);
   }
 
   /**
